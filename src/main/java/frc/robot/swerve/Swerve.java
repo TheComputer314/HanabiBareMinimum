@@ -14,13 +14,13 @@ public class Swerve extends SubsystemBase {
   private final SwerveDriveKinematics kinematics;
 
   // ホイールからホイールの幅、メートル
-  private final double trackWidthMeters = .5;
   private final double trackLengthMeters = .5;
+  private final double trackWidthMeters = .5;
 
   // ドライブベースの最大速度。秒速メートルと秒速ラジアン
   private final double maxLinearVelocityMetersPerSec = Module.wheelMaxLinearVelocity;
   private final double maxAngularVelocityRadiansPerSec =
-      Module.wheelMaxLinearVelocity / Math.hypot(trackLengthMeters / 2, trackWidthMeters / 2);
+      Module.wheelMaxLinearVelocity / Math.hypot(trackWidthMeters / 2, trackLengthMeters / 2);
 
   public Swerve() {
     modules = new Module[] {new Module(0), new Module(1), new Module(2), new Module(3)};
@@ -28,10 +28,10 @@ public class Swerve extends SubsystemBase {
     // +X=前,+Y=左
     kinematics =
         new SwerveDriveKinematics(
-            new Translation2d(trackWidthMeters / 2, trackLengthMeters / 2),
-            new Translation2d(trackWidthMeters / 2, -trackLengthMeters / 2),
-            new Translation2d(-trackWidthMeters / 2, trackLengthMeters / 2),
-            new Translation2d(-trackWidthMeters / 2, -trackLengthMeters / 2));
+            new Translation2d(trackLengthMeters / 2, trackWidthMeters / 2),
+            new Translation2d(trackLengthMeters / 2, -trackWidthMeters / 2),
+            new Translation2d(-trackLengthMeters / 2, trackWidthMeters / 2),
+            new Translation2d(-trackLengthMeters / 2, -trackWidthMeters / 2));
   }
 
   public Command teleopDrive(
